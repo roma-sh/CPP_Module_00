@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:22 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 01:37:44 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 01:52:58 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,16 @@ bool	PhoneBook::add_phone_num(int i)
 {
 	cout << "Enter phone number:" << endl;
 	if (!(cin >> contacts[i].phone_number))
-		return false;
-	if (cin.fail())
 	{
-		cin.clear();
-		cout << "Invalid input. Please enter a valid integer." << endl;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		add_phone_num(i);
+		if (cin.eof())
+			return false;
+		else
+		{
+			cin.clear();
+			cout << "Invalid input. Please enter a valid number." << endl;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			add_phone_num(i);
+		}
 	}
 	return true;
 }
