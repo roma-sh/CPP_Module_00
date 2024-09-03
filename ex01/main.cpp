@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:53:20 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/03 17:32:42 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 01:18:43 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,24 @@ int	main()
 	{
 		if (i > 7)
 			i = 0;
-		cout << "enter a command: add - search - exit"<<endl;
-		cin >> cmd;
-
-		if (cmd == "add")
+		cout << "Enter a command: ADD - SEARCH - EXIT"<<endl;
+		if (!(cin >> cmd))
+			break ;
+		if (cmd == "ADD")
 		{
-			new_list.add(i);
+			if (!(new_list.add(i)))
+				break ;
 			i++;
 		}
-		else if (cmd == "search")
+		else if (cmd == "SEARCH")
 			new_list.search();
-		else if (cmd == "exit")
+		else if (cmd == "EXIT")
 		{
 			cout << "Good Bye!!" << endl;
 			break ;
 		}
 		else
-			cout << "Invalid command" << endl;
+			cout << "Invalid command, ";
 	}
 	return (0);
 }

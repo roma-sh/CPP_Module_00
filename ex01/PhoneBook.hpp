@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:17 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/03 17:00:00 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 00:33:23 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ class PhoneBook
 		Contact		contacts[8];
 		PhoneBook();
 		~PhoneBook();
-		void		add(int i);
+		bool		add(int i);
 		void		search();
 
 	private:
-		void		add_firstname(int i);
-		void		add_lastname(int i);
-		void		add_nickname(int i);
-		void		add_phone_num(int i);
-		void		add_darkest_secret(int i);
+		bool		add_firstname(int i);
+		bool		add_lastname(int i);
+		bool		add_nickname(int i);
+		bool		add_phone_num(int i);
+		bool		add_darkest_secret(int i);
 };
 
 #endif
