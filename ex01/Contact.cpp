@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:20 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 12:31:43 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 15:26:44 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ std::string Contact::get_darkest_secret()
 	return (darkest_secret);
 }
 
-int	Contact::get_phone_number()
+std::string	Contact::get_phone_number()
 {
 	return (phone_number);
 }
@@ -60,7 +60,7 @@ void	Contact::set_darkest_secret(std::string data)
 {
 	darkest_secret = data;
 }
-void	Contact::set_phone_number(int a)
+void	Contact::set_phone_number(std::string data)
 {
-	phone_number = a;
+	phone_number = data;
 }

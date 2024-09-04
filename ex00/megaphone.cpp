@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:52:42 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 12:02:29 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 15:24:09 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int main(int argc, char *argv[])
 	}
 	for (int i = 1; i < argc; i++)
 	{
-		for (int j = 0; argv[i][j]; j++)
-			std::cout << (char) toupper(argv[i][j]);
+		std::string str(argv[i]);
+		for (std::string::iterator it=str.begin(); it!=str.end(); ++it)
+			std::cout << (char) toupper(*it);
 	}
 	std::cout << std::endl;
 	return 0;

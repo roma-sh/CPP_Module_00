@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:22 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 12:42:36 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:05:11 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,31 @@ bool	PhoneBook::add_darkest_secret(int i)
 
 bool	PhoneBook::add_phone_num(int i)
 {
-	int x;
+	std::string	tmp_str;
+	bool valid;
 
-	std::cout << "Enter phone number:" << std::endl;
-	if (!(std::cin >> x))
+	while (1)
 	{
-		if (std::cin.eof())
+		valid = true;
+		std::cout << "Enter phone number:" << std::endl;
+		if (!getline(std::cin, tmp_str))
 			return false;
-		else
+		for (std::string::iterator it=tmp_str.begin(); it!=tmp_str.end(); ++it)
 		{
-			std::cin.clear();
-			std::cout << "Invalid input. Please enter a valid number." << std::endl;
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			add_phone_num(i);
+			if (!isdigit(int(*it)))
+			{
+				std::cout <<"Invalid Number" << std::endl;
+				valid = false;
+				break ;
+			}
 		}
+		if (!valid)
+			continue ;
+		contacts[i].set_phone_number(tmp_str);
+		if (contacts[i].get_phone_number().empty())
+			continue ;
+		break ;
 	}
-	else
-		contacts[i].set_phone_number(x);
 	return true;
 }
 
@@ -104,9 +112,9 @@ bool PhoneBook::add(int i)
 		return false;
 	if (!add_nickname(i))
 		return false;
-	if (!add_darkest_secret(i))
-		return false;
 	if (!add_phone_num(i))
+		return false;
+	if (!add_darkest_secret(i))
 		return false;
 	std::cout << "Contact "<< contacts[i].get_first_name() << " was added"<<std::endl;
 	return true;

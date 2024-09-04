@@ -6,7 +6,7 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:14 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 12:28:59 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 15:26:57 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Contact
 	std::string	last_name;
 	std::string	nick_name;
 	std::string	darkest_secret;
-	int		phone_number;
+	std::string	phone_number;
 	public:
 	Contact();
 	~Contact();
@@ -32,13 +32,13 @@ class Contact
 	std::string	get_last_name();
 	std::string	get_nick_name();
 	std::string	get_darkest_secret();
-	int			get_phone_number();
+	std::string	get_phone_number();
 
 	void	set_first_name(std::string data);
 	void	set_last_name(std::string data);
 	void	set_nick_name(std::string data);
 	void	set_darkest_secret(std::string data);
-	void	set_phone_number(int a);
+	void	set_phone_number(std::string data);
 };
 
 #endif
