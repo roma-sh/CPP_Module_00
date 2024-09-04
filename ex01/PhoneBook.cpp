@@ -6,79 +6,93 @@
 /*   By: rshatra <rshatra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:55:22 by rshatra           #+#    #+#             */
-/*   Updated: 2024/09/04 01:52:58 by rshatra          ###   ########.fr       */
+/*   Updated: 2024/09/04 12:42:36 by rshatra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-using namespace std;
-
 PhoneBook::PhoneBook()
 {
-	cout << "Your PhoneBook was created" << endl;
+	std::cout << "Your PhoneBook was created" << std::endl;
 }
 
 PhoneBook::~PhoneBook()
 {
-	cout << "Your PhoneBook was removed" << endl;
+	std::cout << "Your PhoneBook was removed" << std::endl;
 }
 
 bool	PhoneBook::add_firstname(int i)
 {
-	cout << "Enter first name:" << endl;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	if (!getline(cin, contacts[i].first_name))
+	std::string	tmp_str;
+
+	std::cout << "Enter first name:" << std::endl;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	if (!getline(std::cin, tmp_str))
 		return false;
-	if (contacts[i].first_name.empty())
+	contacts[i].set_first_name(tmp_str);
+	if (contacts[i].get_first_name().empty())
 		add_firstname(i);
 	return true;
 }
 
 bool	PhoneBook::add_lastname(int i)
 {
-	cout << "Enter last name:" << endl;
-	if (!getline(cin, contacts[i].last_name))
+	std::string	tmp_str;
+
+	std::cout << "Enter last name:" << std::endl;
+	if (!getline(std::cin, tmp_str))
 		return false;
-	if (contacts[i].last_name.empty())
+	contacts[i].set_last_name(tmp_str);
+	if (contacts[i].get_last_name().empty())
 		add_lastname(i);
 	return true;
 }
 
 bool	PhoneBook::add_nickname(int i)
 {
-	cout << "Enter nickname:" << endl;
-	if (!getline(cin, contacts[i].nick_name))
+	std::string	tmp_str;
+
+	std::cout << "Enter nickname:" << std::endl;
+	if (!getline(std::cin, tmp_str))
 		return false;
-	if (contacts[i].nick_name.empty())
+	contacts[i].set_nick_name(tmp_str);
+	if (contacts[i].get_nick_name().empty())
 		add_nickname(i);
 	return true;
 }
 bool	PhoneBook::add_darkest_secret(int i)
 {
-	cout << "Enter the darkest secret:" << endl;
-	if (!getline(cin, contacts[i].darkest_secret))
+	std::string	tmp_str;
+
+	std::cout << "Enter the darkest secret:" << std::endl;
+	if (!getline(std::cin, tmp_str))
 		return false;
-	if (contacts[i].darkest_secret.empty())
+	contacts[i].set_darkest_secret(tmp_str);
+	if (contacts[i].get_darkest_secret().empty())
 		add_darkest_secret(i);
 	return true;
 }
 
 bool	PhoneBook::add_phone_num(int i)
 {
-	cout << "Enter phone number:" << endl;
-	if (!(cin >> contacts[i].phone_number))
+	int x;
+
+	std::cout << "Enter phone number:" << std::endl;
+	if (!(std::cin >> x))
 	{
-		if (cin.eof())
+		if (std::cin.eof())
 			return false;
 		else
 		{
-			cin.clear();
-			cout << "Invalid input. Please enter a valid number." << endl;
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cin.clear();
+			std::cout << "Invalid input. Please enter a valid number." << std::endl;
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			add_phone_num(i);
 		}
 	}
+	else
+		contacts[i].set_phone_number(x);
 	return true;
 }
 
@@ -94,11 +108,11 @@ bool PhoneBook::add(int i)
 		return false;
 	if (!add_phone_num(i))
 		return false;
-	cout << "Contact "<< contacts[i].first_name<< " was added"<<endl;
+	std::cout << "Contact "<< contacts[i].get_first_name() << " was added"<<std::endl;
 	return true;
 }
 
-string	format_text(string data)
+std::string	format_text(std::string data)
 {
 	if(data.length() > 10)
 		return (data.substr(0, 9) + ".");
@@ -110,41 +124,41 @@ void	PhoneBook::search()
 {
 	int i = 0;
 	int contact_index = 1000;
-		cout <<"---------------------------------------------" << endl;
-		cout << "|" << setw(10) << right << "Index" << "|"
-			<< setw(10) << right << "First name" << "|"
-			<< setw(10) << right << "Last name" << "|"
-			<< setw(10) << right << "Nickname" << "|" << endl;
-		cout <<"---------------------------------------------" << endl;
+		std::cout <<"---------------------------------------------" << std::endl;
+		std::cout << "|" << std::setw(10) << std::right << "Index" << "|"
+			<< std::setw(10) << std::right << "First name" << "|"
+			<< std::setw(10) << std::right << "Last name" << "|"
+			<< std::setw(10) << std::right << "Nickname" << "|" << std::endl;
+		std::cout <<"---------------------------------------------" << std::endl;
 	while (i < 8)
 	{
-		if (contacts[i].first_name.empty())
+		if (contacts[i].get_first_name().empty())
 			break ;
-		cout << "|" << setw(10) << right << i + 1 << "|"
-			<< setw(10) << right << format_text(contacts[i].first_name) << "|"
-			<< setw(10) << right << format_text(contacts[i].last_name) << "|"
-			<< setw(10) << right << format_text(contacts[i].nick_name) << "|" << endl;
+		std::cout << "|" << std::setw(10) << std::right << i + 1 << "|"
+			<< std::setw(10) << std::right << format_text(contacts[i].get_first_name()) << "|"
+			<< std::setw(10) << std::right << format_text(contacts[i].get_last_name()) << "|"
+			<< std::setw(10) << std::right << format_text(contacts[i].get_nick_name()) << "|" << std::endl;
 		i++;
 	}
-		cout <<"---------------------------------------------" << endl;
+		std::cout <<"---------------------------------------------" << std::endl;
 	if (i == 0)
 		return ;
 	while (1)
 	{
-		cout << "Choose contact index" << endl;
-		cin >> contact_index;
-		if (cin.fail() || (contact_index > i || contact_index < 1))
+		std::cout << "Choose contact index" << std::endl;
+		std::cin >> contact_index;
+		if (std::cin.fail() || (contact_index > i || contact_index < 1))
 		{
-			cin.clear();
-			cout << "Invalid input." << endl;
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cin.clear();
+			std::cout << "Invalid input." << std::endl;
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		else
 			break ;
 	}
-	cout << "First name:      " << contacts[contact_index - 1].first_name << endl;
-	cout << "Last name:       " << contacts[contact_index - 1].last_name << endl;
-	cout << "Nickname:        "  << contacts[contact_index - 1].nick_name << endl;
-	cout << "Darkest secret:  "  << contacts[contact_index - 1].darkest_secret << endl;
-	cout << "Phone number:    "  << contacts[contact_index - 1].phone_number << endl;
+	std::cout << "First name:      " << contacts[contact_index - 1].get_first_name() << std::endl;
+	std::cout << "Last name:       " << contacts[contact_index - 1].get_last_name ()<< std::endl;
+	std::cout << "Nickname:        "  << contacts[contact_index - 1].get_nick_name() << std::endl;
+	std::cout << "Darkest secret:  "  << contacts[contact_index - 1].get_darkest_secret() <<std::endl;
+	std::cout << "Phone number:    "  << contacts[contact_index - 1].get_phone_number() << std::endl;
 }
